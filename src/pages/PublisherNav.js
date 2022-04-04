@@ -19,7 +19,7 @@ return(
          <Nav.Link href="/">Home</Nav.Link> 
          <Nav><Nav.Link href="/AddProduct">Add New Product</Nav.Link>
            <Nav.Link href={"/PublisherProduct/"+id}>Your Listings</Nav.Link> 
-           <Nav.Link href="/Shelf">Total Sold Books</Nav.Link></Nav>
+           <Nav.Link href="/Royalty">Royalty</Nav.Link></Nav>
          <Nav.Link href="/About">About Us</Nav.Link>
            <Nav.Link href="/ContactUs">Contact Us</Nav.Link>
            <Nav.Link href="/Feedback">Feedback</Nav.Link>
