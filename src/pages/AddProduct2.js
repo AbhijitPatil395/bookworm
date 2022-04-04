@@ -6,7 +6,7 @@ import axios from "axios";
 import Navigationbar from './Navigationbar';
 
 export function AddProduct2(){
-let userid=sessionStorage.getItem("UserId")
+  let userid=sessionStorage.getItem("UserId")
   const [product, setProduct] = useState({productPublisher:userid});
   const [imgfile,setImgFile]=useState();
   const [imgName,setImgFileName]=useState();
@@ -243,6 +243,8 @@ return(<><Navigationbar/>
     
   </div>
 </div>
+
+
 
 {/* <input type="radio" name="yes_no" checked>Yes</input>
 <input type="radio" name="yes_no">No</input> */}
