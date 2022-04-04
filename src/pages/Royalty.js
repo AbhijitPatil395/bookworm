@@ -6,7 +6,7 @@ import { NavLink, useParams } from "react-router-dom"
 import '../PublisherProduct.css';
 import Edit from './Edit';
 import Navigationbar from './Navigationbar';
-import Royalty2 from './Royalty2';
+
 
 function Royalty(props) {
     
