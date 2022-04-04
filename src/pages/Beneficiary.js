@@ -7,11 +7,11 @@ import { NavLink, useParams } from "react-router-dom"
 function Beneficiary(){
 const [benif, setBenif] = useState([])
 const { Id } = useParams()
-const entry={['prodBenProductId']:Id};
+let entry={"prodBenProductId":Id};
 useEffect(() => 
 {
 
-    fetch("http://localhost:8080/crud/beneficiaries")
+    fetch("http://localhost:8080/crud/prodBenDetails")
         .then(res => res.json())
         .then((result) => setBenif(result));
 
@@ -20,20 +20,22 @@ useEffect(() =>
 
 const changeHandler=(event)=>{
    
- entry= {...entry,['prodBenBenId']:event.target.value}
+ entry= {...entry,"prodBenBenId":event.target.value}
+ console.log(entry);
     
 }
 const percentHandler=(event)=>{
    
- entry= {...entry,['prodBenPercentage']:event.target.value}
+ entry= {...entry,"prodBenPercentage":event.target.value}
     
 }
 
 const handleSubmit=()=>{
-   
-    
+   alert("insubmit")
+    console.log("in submit")
+    console.log(entry)
  
-    const url = ''
+    const url = 'http://localhost:8080/crud/addProdBen'
     const requestOptions = 
     {
         method: 'POST',
@@ -46,7 +48,7 @@ const handleSubmit=()=>{
      
 }
 return(<><Navigationbar/>
-<form className="container-fluid">
+<form className="container-fluid" onSubmit={handleSubmit}>
   <fieldset >
     <legend>Add Beneficiary</legend>
    
@@ -71,12 +73,12 @@ return(<><Navigationbar/>
    <br/>
     <div class="row g-3">
   <div class="col-md-4 mx-auto">
-    <input type="text" class="form-control" placeholder="%" aria-label="First name"/>
+    <input type="text" onChange={percentHandler} class="form-control" placeholder="%" aria-label="First name"/>
   </div>
   </div>
  
   <br/>
-    <button type="submit" class="btn btn-primary" onClick={handleSubmit}>Submit</button>
+    <button type="submit" class="btn btn-primary" >Submit</button>
     <a class="btn btn-primary" href="/AddBeneficiary" role="button">Create beneficiary</a>
   </fieldset>
 </form></>
