@@ -9,6 +9,7 @@ import Navigationbar from './Navigationbar';
 import Royalty2 from './Royalty2';
 
 function Royalty(props) {
+    
 
     const [PublisherProduct, setPublisherProduct] = useState([]);
     const [PProduct, setPProduct] = useState([]);

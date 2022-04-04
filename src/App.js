@@ -20,6 +20,7 @@ import PublisherProduct from './pages/PublisherProduct';
 import Edit from './pages/Edit2';
 import Profile from './pages/Profile';
 import AddBeneficiary from './pages/AddBeneficiary';
+import Royalty from './pages/Royalty';
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
             <Route path='/Beneficiary/:Id' element={<Beneficiary/>}></Route>
             <Route path='/AddBeneficiary' element={<AddBeneficiary/>}></Route>
             <Route path='/About' element={<About/>}></Route>
+            <Route path='/Royalty' element={<Royalty/>}></Route>
             <Route path='/Signup' element={<Signup/>}></Route>
             <Route path='/Login' element={<Login/>}></Route>
             <Route path='/Feedback' element={<Feedback/>}></Route>
