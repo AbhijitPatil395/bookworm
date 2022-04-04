@@ -119,7 +119,7 @@ function Library()
         <Container fluid style={{ textAlign: 'left' }}>
             <Row style={{ padding: '10px' }}>
                 <Col xs={2}><h2><b>bookWorm</b></h2></Col>
-                <Col xs={4}><h2>Books</h2></Col>
+                <Col xs={4}><h2>Books to Sell</h2></Col>
                 <Col xs={4}>
                     <div class="btn-group" >
                         <Button variant="light" id="bt1" onClick={()=>onButton("buy")} value="buy" class="button">&nbsp;&nbsp;&nbsp;Buy&nbsp;&nbsp;&nbsp;</Button>
