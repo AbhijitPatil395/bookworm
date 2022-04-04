@@ -15,7 +15,7 @@ function Home() {
                     </img>
                     <h6 style={{textAlign: 'center',padding:"40px"}}>click the below button to see what surprises we have in <br></br>store for you</h6>
                 </Col>
-                
+                {/* jhh */}
             </Row>
 
                 <Row>

@@ -7,7 +7,7 @@ function Footer() {
             <Container fluid style={{ backgroundColor: 'teal' }} >
                 <Row style={{ paddingTop: "40px" }}>
                     <Col style={{ textAlign: 'center' }}>
-                        <h5>Contact: <a href="mailto:help.bookworm@gmail.com">help.bookworm@gmail.com</a></h5>
+                        <h5>Contact: <a  class="link-light" href="mailto:help.bookworm@gmail.com">help.bookworm@gmail.com</a></h5>
                     </Col>
                 </Row>
                 <Row style={{ padding: "20px" }}>
