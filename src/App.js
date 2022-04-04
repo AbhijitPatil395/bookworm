@@ -16,7 +16,7 @@ import { useState } from 'react';
 import Description from './pages/Description';
 import AddProduct from './pages/AddProduct2';
 import PublisherProduct from './pages/PublisherProduct';
-import Edit from './pages/Edit';
+import Edit from './pages/Edit2';
 import Profile from './pages/Profile';
 
 function App() {
