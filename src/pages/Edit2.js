@@ -1,98 +1,88 @@
 import React from 'react';
-import { useParams,useNavigate } from "react-router-dom";
-import { useState } from "react";
-import '../PubPro.css';
-import axios from "axios";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Navigationbar from './Navigationbar';
+function Edit() {
 
-export function AddProduct2(){
-  let userid=sessionStorage.getItem("UserId")
-  const [product, setProduct] = useState({productPublisher:userid});
-  const [imgfile,setImgFile]=useState();
-  const [imgName,setImgFileName]=useState();
-  const [pdffile,setPdfFile]=useState();
-  const [pdfName,setPdfFileName]=useState();
-  //const [usertype,SetUserType]= useState(true);
+    //const [product, setProd] = useState({});
+    let userid=sessionStorage.getItem("UserId")
+    const { Id } = useParams();
+    let navigate = useNavigate(); 
+    const [imgfile,setImgFile]=useState();
+    const [imgName,setImgFileName]=useState();
+    const [pdffile,setPdfFile]=useState();
+    const [pdfName,setPdfFileName]=useState();
+    const [product, setProd] = useState({productPublisher:userid});
+    useEffect(() => {
+        fetch("http://localhost:8080/crud/search/" + Id)
+            .then(res => res.json())
+            .then((result) => { setProd(result);  }
+            );
+    }, []);
 
-  let navigate = useNavigate();
- 
-  const handleChange = (event) => 
-  {
-      const name = event.target.name;
-      const value = event.target.value;
-      setProduct(values => ({ ...values, [name]: value }))
-      if(event.target.name=="isRentable")
-      {
-        if(event.target.checked)
-          setProduct(values => ({ ...values, [name]: true }))
-        else
-        setProduct(values => ({ ...values, [name]: false }))
-      }
-      console.log(product)
-  }
-  const imgHandler = (event) => 
-  {
+
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setProd(values => ({ ...values, [name]: value }))
+        console.log(product);
+    }
+    const imgHandler = (event) => 
+    {
     console.log("inside img handler")
     setImgFile(event.target.files[0])
     setImgFileName(event.target.files[0].name)
-    setProduct({...product,productImage:event.target.files[0].name});
+    setProd({...product,productImage:event.target.files[0].name});
     
-  }
-  const fileHandler = (event) => 
+     }
+     const fileHandler = (event) => 
   {
     console.log("inside file handler")
     setPdfFile(event.target.files[0])
     setPdfFileName(event.target.files[0].name)
-    setProduct({...product,productPdf:event.target.files[0].name});
+    setProd({...product,productPdf:event.target.files[0].name});
     
   }
-
- 
-  const handleSubmit = event => 
-  {
-      
-  alert("on submit signup "+ product.productName );
-
-      console.log(imgfile);
-      const fd = new FormData();
-      fd.append('file', imgfile, imgName);
-      fd.append('file', pdffile, pdfName);
-
-      //console.log('inside submit handler');
-      console.log(fd);
-      const urlImage = 'http://localhost:8080/upload'
-      axios.post(urlImage, fd).then(res => console.log(res))
-     
-
-      const url = 'http://localhost:8080/crud/addProduct'
-      const requestOptions = 
+     const handleSubmit = (event) => {
+        let demo = JSON.stringify(product);
+        console.log(JSON.parse(demo));
+        // fetch("http://localhost:8080/crud/productupdate", {
+        //     method: 'PUT',
+        //     headers: { 'Content-type': 'application/json' },
+        //     body: demo
+        // }).then(res => res.json());
+       
+        //   navigate('/PublisherProduct'); 
+        const requestOptions = 
       {
-          method: 'POST',
+          method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(product)
+          body: demo
       };
-      console.log(product);
-      alert("To see");
-      fetch(url, requestOptions)
+      
+      fetch("http://localhost:8080/crud/update/"+Id, requestOptions)
           .then(response => console.log('Submitted successfully'))
           .catch(error => console.log('Form submit error: ', error))
-          navigate("/AddProduct")
-          console.log(product);
-         
-          alert("Product Added Successfully.")
-           
-    };
+          navigate("/PublisherProduct/"+Id)
 
-return(<><Navigationbar/>
-  
-  <div class="signup-form2">
+        
+        event.preventDefault(); 
+        // alert(employee);
+    }
+ 
+
+    
+
+          
+    return (
+      <><Navigationbar/>
 <form className="form-horizontal" onSubmit={handleSubmit}>
 <legend>ADD PRODUCT DETAILS</legend><br/>
 <div className="row">
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT NAME</label>  </div>
   <div className="col">
-  <input id="product_name" onChange={handleChange} name="productName" placeholder="PRODUCT NAME" className="form-control input-md" required="" type="text"/>
+  <input id="product_name" onChange={handleChange} value={product.productName || ""} name="productName" placeholder="PRODUCT NAME" className="form-control input-md" required="" type="text"/>
  
   
   </div>
@@ -102,7 +92,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT ENGLISH NAME</label>  </div> 
   <div className="col">
-  <input id="english" onChange={handleChange} name="productEnglishName" placeholder="PRODUCT ENGLISH NAME" className="form-control input-md" required="" type="text"/>
+  <input id="english" onChange={handleChange} value={product.productEnglishName || ""}  name="productEnglishName" placeholder="PRODUCT ENGLISH NAME" className="form-control input-md" required="" type="text"/>
     
   </div>
 </div>
@@ -112,7 +102,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT TYPE</label></div>
   <div className="col">
-    <select id="productType"  onChange={handleChange} name="productType" className="form-control">
+    <select id="productType" value={product.productType || ""}   onChange={handleChange} name="productType" className="form-control">
         <option>Select Product type</option>
         <option id='1' value={1}>E-Book</option>
         <option id='2' value={2}>Audio-Book</option>
@@ -126,7 +116,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT BASE PRICE</label>  </div>
   <div className="col">
-  <input id="gyg"  onChange={handleChange} name="productBaseprice" placeholder="PRODUCT BASE PRICE" className="form-control input-md" required="" type="text"/>
+  <input id="gyg"  onChange={handleChange} value={product.productBaseprice || ""} name="productBaseprice" placeholder="PRODUCT BASE PRICE" className="form-control input-md" required="" type="text"/>
     
   </div>
 </div>
@@ -136,7 +126,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT SELLING PRICE</label> </div> 
   <div className="col">
-  <input id="oioi"  onChange={handleChange} name="productSpCost" placeholder="PRODUCT SP" className="form-control input-md" required="" type="text"/>
+  <input id="oioi"  onChange={handleChange} value={product.productSpCost || ""} name="productSpCost" placeholder="PRODUCT SP" className="form-control input-md" required="" type="text"/>
   </div>
 </div>
 
@@ -145,7 +135,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label">PRODUCT OFFER PRICE</label>  </div>
   <div className="col">
-  <input id="product_offerprice"  onChange={handleChange} name="productOfferprice" placeholder="PRODUCT Offer Price" className="form-control input-md" required="" type="text"/>
+  <input id="product_offerprice" value={product.productOfferprice || ""}  onChange={handleChange} name="productOfferprice" placeholder="PRODUCT Offer Price" className="form-control input-md" required="" type="text"/>
   </div>
 </div>
 
@@ -154,7 +144,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT OFFER EXPIRY</label>  </div>
   <div className="col">
-  <input id="product_offerprice_expiry"  onChange={handleChange} name="productOfferpriceExpirydate"  className="form-control input-md" required="" type="date"/>
+  <input id="product_offerprice_expiry" value={product.productOfferpriceExpirydate || ""}  onChange={handleChange} name="productOfferpriceExpirydate"  className="form-control input-md" required="" type="date"/>
   </div>
 </div>
 
@@ -163,7 +153,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label">PRODUCT DESCRIPTION SHORT</label></div>
   <div className="col">                     
-    <textarea className="form-control"  onChange={handleChange} id="productDescShort" name="productDescShort"></textarea>
+    <textarea className="form-control"  value={product.productDescShort || ""}  onChange={handleChange} id="productDescShort" name="productDescShort"></textarea>
   </div>
 </div>
 
@@ -172,7 +162,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT DESCRIPTION LONG</label></div>
   <div className="col">                     
-    <textarea className="form-control"  onChange={handleChange} id="productDescLong" name="productDescLong"></textarea>
+    <textarea className="form-control" value={product.productDescLong || ""}   onChange={handleChange} id="productDescLong" name="productDescLong"></textarea>
   </div>
 </div>
 
@@ -182,7 +172,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT ISBN</label>  </div>
   <div className="col">
-  <input id="product_isbn"  onChange={handleChange} name="productIsbn" placeholder="PRODUCT ISBN" className="form-control input-md" required="" type="text"/>
+  <input id="product_isbn"  onChange={handleChange} value={product.productIsbn || ""}  name="productIsbn" placeholder="PRODUCT ISBN" className="form-control input-md" required="" type="text"/>
     
   </div>
 </div>
@@ -193,7 +183,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT AUTHOR ID</label>  </div>
   <div className="col">
-  <input id="stock_alert"  onChange={handleChange} name="productAuthorId" placeholder="product_author_id" className="form-control input-md" required="" type="text"/>
+  <input id="stock_alert"  onChange={handleChange} value={product.productAuthorId || ""}  name="productAuthorId" placeholder="product_author_id" className="form-control input-md" required="" type="text"/>
     
   </div>
 </div>
@@ -203,7 +193,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT LANGUAGE</label></div>
   <div className="col">
-    <select id="product_language"  onChange={handleChange} name="productLanguage" className="form-control">
+    <select id="product_language" value={product.productLanguage || ""}   onChange={handleChange} name="productLanguage" className="form-control">
       
     <option id='1' value={1}>MARATHI</option>
         <option id='2' value={5}>HINDI</option>
@@ -217,7 +207,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT GENRE</label></div>
   <div className="col">
-  <select id="product_genre" onChange={handleChange} name="productGenere" className="form-control">
+  <select id="product_genre" onChange={handleChange} value={product.productGenere || ""}  name="productGenere" className="form-control">
   <option id='1' value={6}>COMIC</option>
         <option id='2' value={4}>BIOPIC</option>
         <option id='3' value={5}>HORROR</option>
@@ -230,7 +220,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >Is Rentable</label></div>
   <div className="col">
-    <input id="is_rent" value={true} onChange={handleChange} name="isRentable" className="input-file" type="checkbox"/>
+    <input id="is_rent" value={true} onChange={handleChange}  name="isRentable" className="input-file" type="checkbox"/>
     &nbsp;&nbsp;&nbsp;Do you want to make this book available for Rent?
   </div>
 </div>
@@ -239,12 +229,10 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT PER DAY PRICE if it is Rentable</label>  </div>
   <div className="col">
-  <input id="gyg"  onChange={handleChange} name="productBasePricePerDay" placeholder="PRODUCT PER DAY PRICE if rentable" className="form-control input-md" required="" type="text"/>
+  <input id="gyg"  onChange={handleChange} value={product.productBasePricePerDay || ""}  name="productBasePricePerDay" placeholder="PRODUCT PER DAY PRICE if rentable" className="form-control input-md" required="" type="text"/>
     
   </div>
 </div>
-
-
 
 {/* <input type="radio" name="yes_no" checked>Yes</input>
 <input type="radio" name="yes_no">No</input> */}
@@ -270,7 +258,7 @@ return(<><Navigationbar/>
 <div className="col">
   <label className="col-md-4 control-label" >PRODUCT IMAGE</label></div>
   <div className="col">
-    <input id="product_image" onChange={imgHandler} name="productImage" className="input-file" type="file"/>
+    <input id="product_image" onChange={imgHandler}  name="productImage" className="input-file" type="file"/>
   </div>
 </div>
 
@@ -292,8 +280,10 @@ return(<><Navigationbar/>
   </div>
   </div>
 </form>
-</div>
 </>
+
 )
+    
 }
-export default AddProduct2;
+
+export default Edit

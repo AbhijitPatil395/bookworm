@@ -17,8 +17,9 @@ import { useState } from 'react';
 import Description from './pages/Description';
 import AddProduct from './pages/AddProduct2';
 import PublisherProduct from './pages/PublisherProduct';
-import Edit from './pages/Edit';
+import Edit from './pages/Edit2';
 import Profile from './pages/Profile';
+import AddBeneficiary from './pages/AddBeneficiary';
 
 function App() {
 
@@ -45,7 +46,8 @@ function App() {
             <Route path='/AddProduct' element={<AddProduct/>}></Route>
             <Route path='/PublisherProduct/:Id' element={<PublisherProduct/>}></Route>
             <Route path='/Edit/:Id' element={<Edit/>}></Route>
-            <Route path='/Beneficiary' element={<Beneficiary/>}></Route>
+            <Route path='/Beneficiary/:Id' element={<Beneficiary/>}></Route>
+            <Route path='/AddBeneficiary' element={<AddBeneficiary/>}></Route>
             <Route path='/About' element={<About/>}></Route>
             <Route path='/Signup' element={<Signup/>}></Route>
             <Route path='/Login' element={<Login/>}></Route>

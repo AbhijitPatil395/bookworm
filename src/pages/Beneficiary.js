@@ -8,7 +8,8 @@ function Beneficiary(){
 const [benif, setBenif] = useState([])
 const { Id } = useParams()
 const entry={['prodBenProductId']:Id};
-useEffect(() => {
+useEffect(() => 
+{
 
     fetch("http://localhost:8080/crud/beneficiaries")
         .then(res => res.json())
@@ -33,7 +34,8 @@ const handleSubmit=()=>{
     
  
     const url = ''
-    const requestOptions = {
+    const requestOptions = 
+    {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(entry)
@@ -43,13 +45,13 @@ const handleSubmit=()=>{
         .catch(error => console.log('Form submit error: ', error))
      
 }
-return(
+return(<><Navigationbar/>
 <form className="container-fluid">
   <fieldset >
     <legend>Add Beneficiary</legend>
    
     <div class="row g-3">
-  <div class="col-md-4 mx-auto">
+  <div class="col-md-4  mx-auto">
   
 
     <label for="inputState" class="form-label">For BookID:{Id}</label>
@@ -62,7 +64,8 @@ return(
     }
      )} 
     </select>
-  
+    
+   
   </div>
   </div>
    <br/>
@@ -74,8 +77,9 @@ return(
  
   <br/>
     <button type="submit" class="btn btn-primary" onClick={handleSubmit}>Submit</button>
+    <a class="btn btn-primary" href="/AddBeneficiary" role="button">Create beneficiary</a>
   </fieldset>
-</form>
+</form></>
 );
 
 
