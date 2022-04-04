@@ -10,7 +10,7 @@ function Home() {
         <div>
             <Row>
                 <Col >
-                    <h2 style={{fontSize: '50px',textAlign: 'center' , paddingTop:"40px"}}>Start Reading at India's Own Online Library</h2>
+                    <h2 style={{fontSize: '50px',textAlign: 'center' , paddingTop:"40px"}}>Start Reading At India's Own Online Library</h2>
                     <img src="../images/openbook.JPG">
                     </img>
                     <h6 style={{textAlign: 'center',padding:"40px"}}>click the below button to see what surprises we have in <br></br>store for you</h6>
