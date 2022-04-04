@@ -12,6 +12,9 @@ export default function Shelf() {
  
  useEffect(() => 
  {
+
+
+  
     
     const url='http://localhost:8080/crud/shelf/'+uid;
   
