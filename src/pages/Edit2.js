@@ -16,36 +16,41 @@ function Edit() {
     useEffect(() => {
         fetch("http://localhost:8080/crud/search/" + Id)
             .then(res => res.json())
-            .then((result) => { setProd(result);  }
+            .then((result) => { setProd(result);console.log("useeffect product Id:"+Id)  }
             );
     }, []);
 
 
-    const handleChange = (event) => {
+    const handleChange = (event) => 
+    {
         const name = event.target.name;
         const value = event.target.value;
         setProd(values => ({ ...values, [name]: value }))
         console.log(product);
+        console.log("product Id:"+Id)
     }
     const imgHandler = (event) => 
     {
-    console.log("inside img handler")
-    setImgFile(event.target.files[0])
-    setImgFileName(event.target.files[0].name)
-    setProd({...product,productImage:event.target.files[0].name});
+        console.log("inside img handler")
+        setImgFile(event.target.files[0])
+        setImgFileName(event.target.files[0].name)
+        setProd({...product,productImage:event.target.files[0].name});
     
-     }
-     const fileHandler = (event) => 
-  {
-    console.log("inside file handler")
-    setPdfFile(event.target.files[0])
-    setPdfFileName(event.target.files[0].name)
-    setProd({...product,productPdf:event.target.files[0].name});
+    }
+    const fileHandler = (event) => 
+    {
+        console.log("inside file handler")
+        setPdfFile(event.target.files[0])
+        setPdfFileName(event.target.files[0].name)
+        setProd({...product,productPdf:event.target.files[0].name});
     
-  }
-     const handleSubmit = (event) => {
+    }
+     const handleSubmit = (event) => 
+     {
         let demo = JSON.stringify(product);
         console.log(JSON.parse(demo));
+        console.log("product Id:"+Id)
+        
         // fetch("http://localhost:8080/crud/productupdate", {
         //     method: 'PUT',
         //     headers: { 'Content-type': 'application/json' },
@@ -54,21 +59,22 @@ function Edit() {
        
         //   navigate('/PublisherProduct'); 
         const requestOptions = 
-      {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: demo
-      };
+        {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: demo
+        };
       
-      fetch("http://localhost:8080/crud/update/"+Id, requestOptions)
-          .then(response => console.log('Submitted successfully'))
-          .catch(error => console.log('Form submit error: ', error))
-          navigate("/PublisherProduct/"+Id)
+          fetch("http://localhost:8080/crud/update/"+Id, requestOptions)
+            .then(response => console.log('Submitted successfully'))
+            .catch(error => console.log('Form submit error: ', error))
+             
 
-        
+              alert("Updated Successfully")
+              navigate("/PublisherProduct/"+userid)
         event.preventDefault(); 
         // alert(employee);
-    }
+      }
  
 
     

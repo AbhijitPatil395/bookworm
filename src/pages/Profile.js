@@ -47,7 +47,7 @@ export function Profile(props)
           
             <div className="w3-threethird">
             
-            <div className="w3-white w3-text-grey w3-card-4">
+            <div className="w3-white w3-text-grey w3-card-6">
               
               <div className="w3-container">
               <div className="w3-display-container">

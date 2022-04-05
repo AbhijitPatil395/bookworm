@@ -15,37 +15,40 @@ function Edit() {
     }, []);
 
 
-    const handleChange = (event) => {
+    const handleChange = (event) => 
+    {
+      console.log("inside Handlechange")
         const name = event.target.name;
         const value = event.target.value;
         setProd(values => ({ ...values, [name]: value }))
     }
 
 
-     const handleSubmit = (event) => {
-        let demo = JSON.stringify(product);
-        console.log(JSON.parse(demo));
-        // fetch("http://localhost:8080/crud/productupdate", {
-        //     method: 'PUT',
-        //     headers: { 'Content-type': 'application/json' },
-        //     body: demo
-        // }).then(res => res.json());
-       
-        //   navigate('/PublisherProduct'); 
-        const requestOptions = 
-      {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: demo
-      };
-      
-      fetch("http://localhost:8080/crud/update/"+Id, requestOptions)
-          .then(response => console.log('Submitted successfully'))
-          .catch(error => console.log('Form submit error: ', error))
-          navigate("/PublisherProduct/"+Id)
-
+    const handleSubmit = (event) => 
+    {
+          let demo = JSON.stringify(product);
+          console.log(JSON.parse(demo));
+          // fetch("http://localhost:8080/crud/productupdate", {
+          //     method: 'PUT',
+          //     headers: { 'Content-type': 'application/json' },
+          //     body: demo
+          // }).then(res => res.json());
         
-        event.preventDefault(); 
+          //   navigate('/PublisherProduct'); 
+          const requestOptions = 
+          {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: demo
+          };
+        
+          fetch("http://localhost:8080/crud/update/"+Id, requestOptions)
+            .then(response => console.log('Submitted successfully'))
+            .catch(error => console.log('Form submit error: ', error))
+            navigate("/PublisherProduct/"+Id)
+
+          
+          event.preventDefault(); 
         // alert(employee);
     }
  
