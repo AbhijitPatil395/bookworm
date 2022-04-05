@@ -3,7 +3,10 @@ import {Button, Container, Row, Col} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import Navigationbar from "./Navigationbar";
 
-function Home() {
+function Home() 
+{
+    const roleId=sessionStorage.getItem("RoleId");
+    const uid=sessionStorage.getItem("UserId");
     return (
         <><Navigationbar/>
         <Container fluid>
@@ -20,7 +23,9 @@ function Home() {
 
                 <Row>
                     <Col style={{paddingBottom:"66px"}}>
-                    <Link to="/Library"> <Button variant="primary" style={{align:'center',fontSize:"17px"}}>Explore Store {'>'}</Button></Link>
+                        {(roleId==2)? <Link to={"/PublisherProduct/"+uid}> <Button variant="primary" style={{align:'center',fontSize:"17px"}}>Your Listings {'>'}</Button></Link>
+                        :<Link to="/Library"> <Button variant="primary" style={{align:'center',fontSize:"17px"}}>Explore Store {'>'}</Button></Link>}
+                    
                     </Col>
                     
                 </Row>

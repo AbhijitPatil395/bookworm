@@ -21,10 +21,10 @@ function About(){
                     </p>
                 </div>
                 <div className="row">
-                    <div className="col-lg-6">
+                    {/* <div className="col-4">
                         <img src="https://i.ibb.co/qpz1hvM/About-us.jpg" alt="about" className="img-fluid" width="100%"/>
-                    </div>
-                    <div className="col-lg-6">
+                    </div> */}
+                    <div className="col-8 signup-form4">
                         <h3>SPECIALLY CURATED LEARNING EXPERIENCES FOR KIDS & ADULTS </h3>
                         <p>We curate a set of learning experiences across creative & intellectual pursuits by partnering with the best in the business. We bring these learning experiences to communities around BookWorm libraries</p>
                         <div className="row">
