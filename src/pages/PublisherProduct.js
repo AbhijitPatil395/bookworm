@@ -101,9 +101,9 @@ function PublisherProduct(props) {
                         <div className="og-li-col og-li-col-6 text-center"><span>{Product.productOfferprice}</span></div>
                         <div className="og-li-col og-li-col-7 text-center"><span>{new Date(Product.productOfferpriceExpirydate).toUTCString()}</span></div>
                         <div className="og-li-col og-li-col-9 text-center"><span>
-                            <a class="btn btn-primary" href={'/Edit/'+Product.productId} role="button">Edit</a>
+                            <a class="btn btn-primary" href={'/Edit/'+Product.productId} role="button">Edit</a>&nbsp;&nbsp;&nbsp;
                             <a class="btn btn-primary" href={'/Beneficiary/'+Product.productId} role="button">Add beneficiary</a>
-                            <button type="button" class="btn btn-danger" onClick={letsdelete}>Delete</button>
+                           {/*  <button type="button" class="btn btn-danger" onClick={letsdelete}>Delete</button> */}
                             </span></div>
                         {/* <button style = {{color:'red'}} onClick={()=>letsEdit(Product.productId)} ></button> */}
                         {/* <div className="og-li-col og-li-col-8 text-center"><span>{Product.isLibrary}</span></div>

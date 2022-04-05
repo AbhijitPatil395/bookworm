@@ -25,12 +25,22 @@ function Royalty(props) {
     }, []);
     
 
-    // const isRentable=(event)=>{
-    //     fetch("http://localhost:8080/crud/rentableproductsearch/" + event.target.value)
-    //         .then(res => res.json())
-    //         .then((result) => { setPublisherProduct(result); setPProduct(result); }
-    //         );
-    // }
+    const isRentable=(event)=>
+    {
+        if(event.target.value==1){
+        fetch("http://localhost:8080/Royalty/getbRoyaltyRent/" +benId )
+            .then(res => res.json())
+            .then((result) => { setPublisherProduct(result); setPProduct(result); }
+            );
+        }
+        else{
+            fetch("http://localhost:8080/Royalty/getbRoyalty/"+benId)
+            .then(res => res.json())
+            .then((result) => { setPublisherProduct(result); setPProduct(result);
+            console.log(result[0])}
+            );
+        }
+    }
     
     // const isLibrary=(event)=>{
     //     fetch("http://localhost:8080/crud/libraryproductsearch/" + event.target.value)
@@ -79,7 +89,7 @@ function Royalty(props) {
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
-                        <select className="" id="relocation" placeholder="Relocation" >
+                        <select onChange={isRentable} className="" id="relocation" placeholder="Relocation" >
                             <option value="" selected="">Rentable?</option>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
