@@ -46,11 +46,11 @@ function Library()
 
                     case 1: setFilteredData(filteredData2.filter((elem) =>  elem.productLanguage=='1'));
                               break;
-                    case 5: setFilteredData(filteredData2.filter((elem) => elem.productLanguage=='5')); 
+                    case 2: setFilteredData(filteredData2.filter((elem) => elem.productLanguage=='2')); 
                              break;
-                    case 7: setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='7')); 
+                    case 3: setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='3')); 
                              break;
-                    case 3: setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='3'));  
+                    case 5: setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='5'));  
                             break;
                     case 0: setFilteredData(filteredData2);
                              break;
@@ -89,10 +89,6 @@ function Library()
         }
 
     }
-
-
-
-
     const rentHandler = () => {
 
 
@@ -100,19 +96,6 @@ function Library()
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     return (
         <><Navigationbar/>
@@ -139,7 +122,7 @@ function Library()
                            
                         </Row>
                         <Row style={{ paddingBottom: "20px" }}>
-                            <Button variant="light" onClick={(e)=>onFilterLang(1)} value={1}><h5 style={{ textAlign: 'left' }}><b>English</b></h5></Button>
+                            <Button variant="light" onClick={(e)=>onFilterLang(3)} value={3}><h5 style={{ textAlign: 'left' }}><b>English</b></h5></Button>
                             {/* <button class="btn btn-primary" onClick={(e)=>onFilterLang(1)} value={1} type="button"><b>English</b></button> */}
 
                         </Row>
@@ -147,10 +130,10 @@ function Library()
                             <Button variant="light" onClick={(e)=>onFilterLang(5)} value={5}><h5 style={{ textAlign: 'left' }}><b>Hindi</b></h5></Button>
                         </Row>
                         <Row style={{ paddingBottom: "20px" }}>
-                            <Button variant="light" onClick={(e)=>onFilterLang(3)} value={3}><h5 style={{ textAlign: 'left' }}><b>Marathi</b></h5></Button>
+                            <Button variant="light" onClick={(e)=>onFilterLang(1)} value={1}><h5 style={{ textAlign: 'left' }}><b>Marathi</b></h5></Button>
                         </Row>
                         <Row style={{ paddingBottom: "20px" }}>
-                            <Button variant="light" onClick={(e)=>onFilterLang(7)} value={7}><h5 style={{ textAlign: 'left' }}><b>Kokani</b></h5></Button>
+                            <Button variant="light" onClick={(e)=>onFilterLang(2)} value={2}><h5 style={{ textAlign: 'left' }}><b>Kokani</b></h5></Button>
                             {/* <button class="btn btn-primary" onClick={(e)=>onFilterLang(7)} value={7} type="button"><b>Kokani</b></button> */}
                         </Row>
                     </Container>

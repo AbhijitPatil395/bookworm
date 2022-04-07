@@ -3,7 +3,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Formik, useFormik } from "formik";
 import * as yup from 'yup';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { useState } from "react";
 import './Signup.css'
 import Navigationbar from "./Navigationbar";
@@ -14,7 +14,6 @@ function AddBeneficiary()
   const [usertype, SetUserType] = useState(true);
 
   let navigate = useNavigate();
-
   const onButton = (event) => {
     if (event.target.value == "user") {
       SetUserType(true);
@@ -144,6 +143,8 @@ function AddBeneficiary()
         )
         .required('Please Enter Email id '),
       benContactNo: yup.number()
+          .min(1000000000,"only 10 digits allowed")
+          .max(9999999999,"only 10 digits allowed")
         .required("please enter your 10 digit mobile number"),
       benBankName: yup.string()
         // .matches('/^[A-Za-z]+$/', "Only alphabets")
