@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import '../PubPro.css';
@@ -12,10 +12,18 @@ export function AddProduct2() {
   const [imgName, setImgFileName] = useState();
   const [pdffile, setPdfFile] = useState();
   const [pdfName, setPdfFileName] = useState();
-  //const [usertype,SetUserType]= useState(true);
-
+  const [lang, setLang] = useState([]);
+  const [genere, setGenere] = useState([]);
   let navigate = useNavigate();
 
+  useEffect(() => {
+    fetch("http://localhost:8080/language/get")
+      .then(res => res.json())
+      .then((result) => { setLang(result) });
+    fetch("http://localhost:8080/genere/get")
+      .then(res => res.json())
+      .then((result) => { setGenere(result) });
+  }, [])
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -200,10 +208,10 @@ export function AddProduct2() {
           <div className="col">
             <select id="product_language" onChange={handleChange} name="productLanguage" className="form-control">
               <option>Select Language</option>
-              <option id='3' value={3}>ENGLISH</option>
-              <option id='1' value={1}>MARATHI</option>
-              <option id='5' value={5}>HINDI</option>
-              <option id='2' value={2}>KOKANI</option>
+              {console.log(lang)}
+              {lang.map(elem => {
+                return <option value={elem.langId}>{elem.langDesc}</option>
+              })}
             </select>
           </div>
         </div>
@@ -215,12 +223,10 @@ export function AddProduct2() {
           <div className="col">
             <select id="product_genre" onChange={handleChange} name="productGenere" className="form-control">
               <option>Select Genere</option>
-              <option id='1' value={1}>FICTION</option>
-              <option id='2' value={2}>SCI-FI</option>
-              <option id='3' value={3}>MYSTERY</option>
-              <option id='4' value={4}>BIOPIC</option>
-              <option id='5' value={5}>HORROR</option>
-              <option id='6' value={6}>COMIC</option>
+              {console.log(genere)}
+              {genere.map(elem => {
+                return <option value={elem.genereId}>{elem.genereDesc}</option>
+              })}
             </select>
           </div>
         </div>
