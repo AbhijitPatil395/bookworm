@@ -9,7 +9,7 @@ function UserNav(props){
         <>
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" >
        <Container>
-       <Navbar.Brand href="#home">bookWorm.com</Navbar.Brand>
+       <Navbar.Brand href="/">bookWorm.com</Navbar.Brand>
        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
        <Navbar.Collapse id="responsive-navbar-nav">
          <Nav className="me-auto">
