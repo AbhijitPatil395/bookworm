@@ -59,6 +59,9 @@ function Library()
                 else if(val==3)
                 {console.log("case3");
                 setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='3'));}
+                else if(val==4)
+                {console.log("case4");
+                setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='4'));}
                 else if(val==5)
                 {console.log("case5");
                 setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='5')); }
@@ -99,6 +102,9 @@ function Library()
         else if(val==8)
         {console.log("case8");
         setFilteredData(filteredData2.filter((elem) => elem.productGenere =='8'));}
+        else if(val==9)
+        {console.log("case9");
+        setFilteredData(filteredData2.filter((elem) => elem.productGenere =='9'));}
         else if(val==0)
         {console.log("case0");
         setFilteredData(filteredData2);
@@ -160,8 +166,8 @@ function Library()
                 <Col xs={2}><h2><b>
 
                     <Container style={{ paddingTop: '70px' }}>
-                        <Row style={{ paddingBottom: "30px", fontSize:"20px"}}>
-                            <Button style={{padding:"10px"}} variant="light" value={0} onClick={onFilterLang} class="button">All Books</Button>
+                        <Row style={{ paddingBottom: "30px", fontSize:"50px"}}>
+                            <Button style={{padding:"10px"}} variant="light" value={0} onClick={onFilterLang}><b>All Books</b></Button>
                         </Row>
                         <Row style={{ paddingBottom: "30px", fontSize:"18px"}} >
                             <select onChange={onFilterLang}>
