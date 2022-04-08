@@ -16,7 +16,7 @@ const NaviBar = props => {
        <Navbar.Collapse id="responsive-navbar-nav">
          <Nav className="me-auto">
          <Nav.Link href="/">Home</Nav.Link> 
-         <Nav.Link href="/Library">Library</Nav.Link>
+         <Nav.Link href="/Library">Store</Nav.Link>
          <Nav.Link href="/About">About Us</Nav.Link>
            <Nav.Link href="/ContactUs">Contact Us</Nav.Link>
            <Nav.Link href="/Feedback">Feedback</Nav.Link>
