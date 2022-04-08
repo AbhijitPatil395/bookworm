@@ -56,6 +56,9 @@ function Library()
                 else if(val==2)
                 {console.log("case2");
                 setFilteredData(filteredData2.filter((elem) => elem.productLanguage=='2')); }
+                else if(val==4)
+                {console.log("case4");
+                setFilteredData(filteredData2.filter((elem) => elem.productLanguage=='4')); }
                 else if(val==3)
                 {console.log("case3");
                 setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='3'));}
