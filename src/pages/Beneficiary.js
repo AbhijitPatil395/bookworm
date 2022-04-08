@@ -45,7 +45,8 @@ const handleSubmit=()=>{
    fetch(url, requestOptions)
         .then(response =>console.log('Submitted successfully'))
         .catch(error => console.log('Form submit error: ', error))
-    alert("Hiiiii")
+        
+     
 }
 return(<><Navigationbar/>
 <form className="container-fluid" onSubmit={handleSubmit}>
@@ -59,7 +60,7 @@ return(<><Navigationbar/>
     <label for="inputState" class="form-label">For BookID:{Id}</label>
   
     <select id="inputState" class="form-select"  onChange={changeHandler}>
-    <option>Select Beneficiary</option>
+    
     
     {benif.map(elem=>{
         return<option id={elem.benId} value={elem.benId}  >BenifID:{elem.benId}  {elem.benName}</option>
@@ -92,3 +93,8 @@ return(<><Navigationbar/>
 
 
 export default Beneficiary;
+
+
+/* {benif.forEach(elem=>(
+         <option value={elem.benId} >{elem.benId}.{elem.benName}lll</option>
+     ))} */
