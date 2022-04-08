@@ -3,7 +3,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Formik, useFormik } from "formik";
 import * as yup from 'yup';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { useState } from "react";
 import './Signup.css'
 import Navigationbar from "./Navigationbar";
@@ -14,7 +14,6 @@ function AddBeneficiary()
   const [usertype, SetUserType] = useState(true);
 
   let navigate = useNavigate();
-
   const onButton = (event) => {
     if (event.target.value == "user") {
       SetUserType(true);
@@ -144,6 +143,8 @@ function AddBeneficiary()
         )
         .required('Please Enter Email id '),
       benContactNo: yup.number()
+          .min(1000000000,"only 10 digits allowed")
+          .max(9999999999,"only 10 digits allowed")
         .required("please enter your 10 digit mobile number"),
       benBankName: yup.string()
         // .matches('/^[A-Za-z]+$/', "Only alphabets")
@@ -152,6 +153,7 @@ function AddBeneficiary()
         // .matches('/^[A-Za-z]+$/', "Only alphabets")
         .required('Please Enter Name '),
       benIfsc: yup.string()
+        .max(10,"Only 10 Character allowed")
         .required('Please Enter Name '),
       benAccNo: yup.string()
         .required('Please Enter Name '),
@@ -228,7 +230,7 @@ function AddBeneficiary()
   <div class="form-group">
     <div class="row">
       <div class="col">
-        <input type="text" class="form-control" name="benIfsc" placeholder="IFSC first_name" value={formikPub.values.benIfsc} {...formikPub.getFieldProps("benIfsc")} />
+        <input type="text" class="form-control" name="benIfsc" placeholder="IFSC" value={formikPub.values.benIfsc} {...formikPub.getFieldProps("benIfsc")} />
         {formikPub.touched.benIfsc && formikPub.errors.benIfsc ?
           <span style={{ color: 'red' }}>{formikPub.errors.benIfsc}</span> : null}
       </div>

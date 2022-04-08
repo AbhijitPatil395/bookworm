@@ -83,7 +83,9 @@ function Signup() {
         .min(8, "Password must be atleast 8 characters")
         .max(16, "maximum 16")
         .required("Please Enter a password"),
-      mobile_no: yup.string()
+      mobile_no: yup.number()
+      .min(1000000000,"only 10 digits allowed")
+      .max(9999999999,"only 10 digits allowed")
         // .matches('/^[0-9]{10}$/', "please enter 10 digit number")
         .required("please enter your 10 digit mobile number"),
     }),
@@ -143,6 +145,8 @@ function Signup() {
         )
         .required('Please Enter Email id '),
       benContactNo: yup.number()
+      .min(1000000000,"only 10 digits allowed")
+      .max(9999999999,"only 10 digits allowed")
         .required("please enter your 10 digit mobile number"),
       benBankName: yup.string()
         // .matches('/^[A-Za-z]+$/', "Only alphabets")
@@ -151,6 +155,7 @@ function Signup() {
         // .matches('/^[A-Za-z]+$/', "Only alphabets")
         .required('Please Enter Name '),
       benIfsc: yup.string()
+      .max(10,"Only 10 Character allowed")
         .required('Please Enter Name '),
       benAccNo: yup.string()
         .required('Please Enter Name '),
@@ -336,7 +341,7 @@ const ChangeButton = (props) => {
         <div class="form-group">
           <div class="row">
             <div class="col">
-              <input type="text" class="form-control" name="benIfsc" placeholder="IFSC first_name" value={formikPub.values.benIfsc} {...formikPub.getFieldProps("benIfsc")} />
+              <input type="text" class="form-control" name="benIfsc" placeholder="IFSC" value={formikPub.values.benIfsc} {...formikPub.getFieldProps("benIfsc")} />
               {formikPub.touched.benIfsc && formikPub.errors.benIfsc ?
                 <span style={{ color: 'red' }}>{formikPub.errors.benIfsc}</span> : null}
             </div>

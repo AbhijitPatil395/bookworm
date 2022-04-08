@@ -53,8 +53,8 @@ export function Profile(props)
               <div className="w3-display-container">
                   <h2>{User.first_name} {User.last_name}</h2>
               </div>
-                <p><i className="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal">Email ID: </i>{User.email_id}</p>
-                <p><i className="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal">Mobile: </i>{User.mobile_no}</p>
+                <p><i className="fa fa-envelope  w3-margin-right w3-large w3-text-teal">Email ID: </i>{User.email_id}</p>
+                <p><i className="fa fa-phone  w3-margin-right w3-large w3-text-teal">Mobile: </i>{User.mobile_no}</p>
                
                 <a href="/"> Edit Profile Details</a>
                 <hr/>
