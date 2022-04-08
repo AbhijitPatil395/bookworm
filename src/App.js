@@ -3,11 +3,11 @@ import { Route, BrowserRouter as Router, Routes ,Outlet} from 'react-router-dom'
 import Signup from './pages/Signup';
 import Navigationbar from './pages/Navigationbar';
 import Home from './pages/Home';
-import Library from './pages/Library2';
+import Library from './pages/Library3';
 import About from './pages/About';
 import Beneficiary from './pages/Beneficiary';
 import Login from './pages/Login';
-import Feedback from 'react-bootstrap/esm/Feedback';
+import Feedback from './pages/Feedback';
 import Help from './pages/Help';
 import Payment from './pages/Payment';
 import Invoice from './pages/Invoice';
@@ -57,6 +57,7 @@ function App() {
             <Route path='/Help' element={<Help/>}></Route>
             <Route path='/Shelf' element={<Shelf/>}></Route>
             <Route path='/Cart' element={<Cart/>}></Route>
+            <Route path='/ContactUs' element={<About/>}></Route>
             <Route path='/Description/:id' element={<Description/>}></Route>
             <Route path='/Payment' element={<Payment prod={products}/>}/>
 

@@ -29,28 +29,22 @@ function Library()
             .then((result) =>{setGenere(result)});
     }, [])
 
-    const onButton = (val) => {
-        // console.log(event.target.value)
-        if (val=="buy"){
-            // console.log(val);
-            // setFilteredData(data);
-            // setFilteredData2(data);
+    const onButton = (event) => {
+       
+        if (event.target.checked){
            
-            fetch("http://localhost:8080/crud/products")
-            .then(res => res.json())
-            .then((result) => { setData(result); setFilteredData(result); setFilteredData2(result); });
-            setTran('p')
-        }
-        else{
-            // console.log("inside else")
-            // setFilteredData2(data.filter((elem) => elem.isRentable == true));
-            // setFilteredData(data.filter((elem) => elem.isRentable == true));
-          
+            setTran('r');
             fetch("http://localhost:8080/crud/rentableproductsearch/1")
             .then(res => res.json())
             .then((result) => { setData(result); setFilteredData(result); setFilteredData2(result); });
-        
-            setTran('r');
+           
+        }
+        else{
+            
+            setTran('p')
+            fetch("http://localhost:8080/crud/products")
+            .then(res => res.json())
+            .then((result) => { setData(result); setFilteredData(result); setFilteredData2(result); });
             
         }
 
@@ -162,13 +156,31 @@ function Library()
         }
 
     }
-    const rentHandler = () => {
-
-
-
-
-
+    const searchBook = (event) => {
+        if(event.target.value=='')
+        {
+            fetch("http://localhost:8080/crud/products")
+            .then(res => res.json())
+            .then((result) => { 
+                setData(result); 
+                setFilteredData(result); 
+                setFilteredData2(result); 
+            });
+        }
+        else
+        {
+            fetch("http://localhost:8080/product/searchbyname/"+event.target.value)
+            .then(res => res.json())
+            .then((result) =>
+             {
+                  setData(result); 
+                  setFilteredData(result); 
+                  setFilteredData2(result); 
+                }
+                );
+        }
     }
+
 
     return (
         <><Navigationbar/>
@@ -176,23 +188,28 @@ function Library()
             <Row style={{ padding: '10px' }}>
                 <Col xs={2}><h2><b>bookWorm</b></h2></Col>
                 <Col xs={4}><h2>Books to Sell</h2></Col>
-                <Col xs={4}>
+                {/* <Col xs={4}>
                     <div class="btn-group" >
                         <Button variant="light" id="bt1" onClick={()=>onButton("buy")} value="buy" class="button">&nbsp;&nbsp;&nbsp;Buy&nbsp;&nbsp;&nbsp;</Button>
                         <Button variant="light" id="bt2" onClick={()=>onButton("rent")} value="rent" class="button">&nbsp;&nbsp;&nbsp;Rent&nbsp;&nbsp;&nbsp;</Button>
 
                     </div>
                 </Col>
-                {isLoggedIn?<Col xs={2}><Link to="/Cart"> <Button variant="primary" style={{ align: 'right' }}>Visit Cart{'>'}</Button></Link></Col>:''}
+                {isLoggedIn?<Col xs={2}><Link to="/Cart"> <Button variant="primary" style={{ align: 'right' }}>Visit Cart{'>'}</Button></Link></Col>:''} */}
+            
+            
+            
             </Row>
+
+
             <Row>
                 <Col xs={2}><h2><b>
 
-                    <Container style={{ paddingTop: '70px' }}>
-                        <Row style={{ paddingBottom: "30px", fontSize:"50px"}}>
-                            <Button style={{padding:"10px"}} variant="light" value={0} onClick={onFilterLang}><b>All Books</b></Button>
+                    {/* <Container style={{ paddingTop: '70px' }}> */}
+                        <Row style={{  paddingBottom: "30px", fontSize:"50px"}}>
+                            <Button style={{padding:"7px"}} variant="light" value={0} onClick={onFilterLang}><b>All Books</b></Button>
                         </Row>
-                        <Row style={{ paddingBottom: "30px", fontSize:"18px"}} >
+                        <Row style={{ paddingLeft: "18px", paddingBottom: "30px", fontSize:"18px"}} >
                             <select onChange={onFilterLang}>
                                 <option value={0}>Select Language</option>
                                 {console.log(lang)}
@@ -202,7 +219,7 @@ function Library()
                             </select>                           
                         </Row>
 
-                        <Row style={{ paddingBottom: "20px", fontSize:"18px"}}>
+                        <Row style={{ paddingLeft: "18px", paddingBottom: "20px", fontSize:"18px"}}>
                         <select onChange={onFilterGenere}>
                                 <option value={0}>Select Genere</option>
                                 {console.log(genere)}
@@ -211,13 +228,36 @@ function Library()
                                 })}
                             </select> 
                         </Row>
-                    </Container>
+                        
+
+
+                    {/* </Container> */}
                 </b></h2></Col>
                 <Col xs={9}><h2>
                     <Container fluid>
                         {/* <Row>
                 <img src={Bookcases} alt="displayimg"></img>
             </Row> */}
+                        
+                        <form onSubmit={searchBook}>
+            <div className="form-group">
+            <div class="row">
+            <div class="col" align="center">
+          <input type="text" className="form-control" name="user_name" placeholder="Search a book.." required="required"
+            onChange={searchBook} />
+            </div>
+            <div class="col" align="center">
+            <input type="checkbox" id="rent" name="rent" value="rent" onClick={onButton} />
+            <label for="rent" style={{fontSize:'20px'}}><b> See Rentable Books</b></label>
+            </div>
+            </div>
+            </div>
+            </form>
+            
+            <hr></hr>
+
+
+
                         <Row>
                             {filteredData.map(book => (
 
@@ -244,6 +284,7 @@ function Library()
 
                             ))}
                         </Row>
+
                     </Container>
                 </h2></Col>
             </Row>

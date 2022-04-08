@@ -292,7 +292,7 @@ export function AddProduct2() {
         <div className="row">
           <div className="col">
             <label className="col-md-4 control-label" >PRODUCT IMAGE</label></div>
-          <div className="col">
+          <div className="col"><i>Size Limit 1MB</i>&nbsp;
             <input id="product_image" onChange={imgHandler} name="productImage" className="input-file" type="file" />
           </div>
         </div>
@@ -301,7 +301,7 @@ export function AddProduct2() {
         <div className="row">
           <div className="col">
             <label className="col-md-4 control-label" >PRODUCT FILE</label></div>
-          <div className="col">
+          <div className="col"><i>Size Limit 1MB</i>&nbsp;
             <input id="product_file" onChange={fileHandler} name="productPdf" className="input-file" type="file" />
           </div>
         </div>

@@ -79,16 +79,7 @@ function Royalty(props) {
                 <div className=""><br/>
                     <h1 className="heading-line">My Royalty!</h1>
                     <div className="og-row" id="og-filters">
-                        <select className="" id="education" placeholder="Education" >
-                            <option value="" selected="">Product Type</option>
-                            <option value="0">E-Book</option>
-                            <option value="1">Book</option>
-                        </select>
-                        <select className="" id="availability" placeholder="Availability" >
-                            <option value="" selected="">Library?</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
+                        
                         <select onChange={isRentable} className="" id="relocation" placeholder="Relocation" >
                             <option value="" selected="">Rentable?</option>
                             <option value="1">Yes</option>

@@ -1,7 +1,15 @@
 import React from 'react';
 import './feedback.css';
 import Navigationbar from './Navigationbar';
-const Feedback = () => {
+import { useNavigate } from 'react-router-dom';
+const Feedback = () =>
+{
+    const navigate= useNavigate();
+    const submitHandler=()=>{
+        alert("Thank You for giving Feedback.")
+        navigate('/')
+    }
+
     return (
         <><Navigationbar/>
             <div className="content">
@@ -15,7 +23,7 @@ const Feedback = () => {
                     mv-storage="#data"
                     mv-source="#source"
                     mv-mode="read">
-                    <form mv-multiple="feedback">
+                    <form mv-multiple="feedback" onSubmit={submitHandler}>
 
                         <label>
                             <h2>
@@ -58,7 +66,8 @@ const Feedback = () => {
                         
 
                         <div className="mv-bar">
-                            <button className="mv-save">
+                           
+                            <button href="/" className="mv-save">
                                 Send Feedback
                             </button>
                         </div>

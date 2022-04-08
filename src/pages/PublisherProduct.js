@@ -58,27 +58,7 @@ function PublisherProduct(props) {
         <><Navigationbar/>
                 <div className=""><br/>
                     <h1 className="heading-line">My Published Books!</h1>
-                    <div className="og-row" id="og-filters">
-                        <select className="" id="education" placeholder="Education" onChange={isProductType}>
-                            <option value="" selected="">Product Type</option>
-                            <option value="0">E-Book</option>
-                            <option value="1">Book</option>
-                        </select>
-                        <select className="" id="availability" placeholder="Availability" onChange={isLibrary}>
-                            <option value="" selected="">Library?</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                        <select className="" id="relocation" placeholder="Relocation" onChange={isRentable}>
-                            <option value="" selected="">Rentable?</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                       {/*  <input type="text" name="state" id="location" className="form-control" placeholder="Search book" >
-                            
-                        </input> */}
-                    </div>
-
+                    
                     <div className="og-row og-li og-li-head">
                         <div className="og-li-col og-li-col-1 text-center">#</div>
                         <div className="og-li-col og-li-col-2">Book Name</div>
