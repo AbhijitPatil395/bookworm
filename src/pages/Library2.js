@@ -159,7 +159,10 @@ function Library()
             <Row>
                 <Col xs={2}><h2><b>
 
-                    <Container style={{ paddingTop: '100px' }}>
+                    <Container style={{ paddingTop: '70px' }}>
+                        <Row style={{ paddingBottom: "30px", fontSize:"20px"}}>
+                            <Button style={{padding:"10px"}} variant="light" value={0} onClick={onFilterLang} class="button">All Books</Button>
+                        </Row>
                         <Row style={{ paddingBottom: "30px", fontSize:"18px"}} >
                             <select onChange={onFilterLang}>
                                 <option value={0}>Select Language</option>
