@@ -63,12 +63,12 @@ const [pageCount, setPageCount] = useState(0)
             setFilteredData2(data.filter((elem) => elem.isRentable == true));
             setFilteredData(data.filter((elem) => elem.isRentable == true));
             setTran('r'); 
-            setPageCount(Math.ceil(data.length / postsPerPage));
+            setPageCount(Math.ceil(filteredData2.length / postsPerPage));
 
         }
         else{
-            setFilteredData(data.slice((offset * postsPerPage)-postsPerPage ,(offset * postsPerPage)));
-            setFilteredData2(data.slice((offset * postsPerPage)-postsPerPage ,(offset * postsPerPage)));
+            setFilteredData(data);
+            setFilteredData2(data);
             setTran('p')
             setPageCount(Math.ceil(data.length / postsPerPage));
         }
