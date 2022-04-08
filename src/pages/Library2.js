@@ -56,6 +56,9 @@ function Library()
                 else if(val==2)
                 {console.log("case2");
                 setFilteredData(filteredData2.filter((elem) => elem.productLanguage=='2')); }
+                else if(val==4)
+                {console.log("case4");
+                setFilteredData(filteredData2.filter((elem) => elem.productLanguage=='4')); }
                 else if(val==3)
                 {console.log("case3");
                 setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='3'));}
@@ -99,6 +102,9 @@ function Library()
         else if(val==8)
         {console.log("case8");
         setFilteredData(filteredData2.filter((elem) => elem.productGenere =='8'));}
+        else if(val==9)
+        {console.log("case9");
+        setFilteredData(filteredData2.filter((elem) => elem.productGenere =='9'));}
         else if(val==0)
         {console.log("case0");
         setFilteredData(filteredData2);
