@@ -166,12 +166,12 @@ function Library()
                 <Col xs={2}><h2><b>
 
                     <Container style={{ paddingTop: '70px' }}>
-                        <Row style={{ paddingBottom: "30px", fontSize:"50px"}}>
+                        <Row style={{ paddingBottom: "30px", fontSize:"50px",paddingLeft:"10px"}}>
                             <Button style={{padding:"10px"}} variant="light" value={0} onClick={onFilterLang}><b>All Books</b></Button>
                         </Row>
-                        <Row style={{ paddingBottom: "30px", fontSize:"18px"}} >
+                        <Row style={{ paddingBottom: "30px", fontSize:"18px",paddingLeft:"22px"}} >
                             <select onChange={onFilterLang}>
-                                <option value={0}>Select Language</option>
+                                <option value={0}>Language</option>
                                 {console.log(lang)}
                                 {lang.map(elem=>{
                                     return<option value={elem.langId}>{elem.langDesc}</option>
@@ -179,9 +179,9 @@ function Library()
                             </select>                           
                         </Row>
 
-                        <Row style={{ paddingBottom: "20px", fontSize:"18px"}}>
+                        <Row style={{ paddingBottom: "20px", fontSize:"18px",paddingLeft:"22px"}}>
                         <select onChange={onFilterGenere}>
-                                <option value={0}>Select Genere</option>
+                                <option value={0}>Genere</option>
                                 {console.log(genere)}
                                 {genere.map(elem=>{
                                     return<option value={elem.genereId}>{elem.genereDesc}</option>
