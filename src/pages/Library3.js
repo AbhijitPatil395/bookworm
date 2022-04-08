@@ -3,6 +3,8 @@ import { Col, Container, Row, Button, Card, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Navigationbar from "./Navigationbar";
 import { useNavigate } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
+
 function Library() 
 {
 
@@ -16,45 +18,63 @@ function Library()
     let [filteredData, setFilteredData] = useState([]);
     let [filteredData2, setFilteredData2] = useState([]);
 
+    // Paging
+    
+const [postsPerPage] = useState(12);
+const [offset, setOffset] = useState(1);
+const [posts, setAllPosts] = useState([]);
+const [pageCount, setPageCount] = useState(0)
+
     useEffect(() => {
 
         fetch("http://localhost:8080/crud/products")
             .then(res => res.json())
-            .then((result) => { setData(result); setFilteredData(result); setFilteredData2(result); });
+            .then((result) => 
+            { 
+                setData(result); 
+                setFilteredData(result.slice((offset * postsPerPage)-postsPerPage ,(offset * postsPerPage))); 
+                setFilteredData2(result.slice((offset * postsPerPage)-postsPerPage ,(offset * postsPerPage)));
+                setPageCount(Math.ceil(result.length / postsPerPage))
+            });
         fetch("http://localhost:8080/language/get")
             .then(res => res.json())
-            .then((result) =>{setLang(result)});
+            .then((result) =>{
+                setLang(result)});
         fetch("http://localhost:8080/genere/get")
             .then(res => res.json())
-            .then((result) =>{setGenere(result)});
-    }, [])
+            .then((result) =>{setGenere(result);
+               
+            });
 
-    const onButton = (val) => {
+            
+    }, [offset])
+
+    const handlePageClick = (event) => {
+        const selectedPage = event.selected;
+        setOffset(selectedPage + 1)
+      };
+
+
+
+
+    const onButton = (event) => {
         // console.log(event.target.value)
-        if (val=="buy"){
-            // console.log(val);
-            // setFilteredData(data);
-            // setFilteredData2(data);
-           
-            fetch("http://localhost:8080/crud/products")
-            .then(res => res.json())
-            .then((result) => { setData(result); setFilteredData(result); setFilteredData2(result); });
-            setTran('p')
+        if (event.target.checked){
+            setFilteredData2(data.filter((elem) => elem.isRentable == true));
+            setFilteredData(data.filter((elem) => elem.isRentable == true));
+            setTran('r'); 
+            setPageCount(Math.ceil(data.length / postsPerPage));
+
         }
         else{
-            // console.log("inside else")
-            // setFilteredData2(data.filter((elem) => elem.isRentable == true));
-            // setFilteredData(data.filter((elem) => elem.isRentable == true));
-          
-            fetch("http://localhost:8080/crud/rentableproductsearch/1")
-            .then(res => res.json())
-            .then((result) => { setData(result); setFilteredData(result); setFilteredData2(result); });
-        
-            setTran('r');
-            
+            setFilteredData(data.slice((offset * postsPerPage)-postsPerPage ,(offset * postsPerPage)));
+            setFilteredData2(data.slice((offset * postsPerPage)-postsPerPage ,(offset * postsPerPage)));
+            setTran('p')
+            setPageCount(Math.ceil(data.length / postsPerPage));
         }
 
     };
+
     const onFilterLang = (event) => {
                 // console.log(event.target.value)
                 let val=event.target.value;
@@ -162,12 +182,27 @@ function Library()
         }
 
     }
-    const rentHandler = () => {
-
-
-
-
-
+    const searchBook = (event) => {
+        if(event.target.value=='')
+        {
+            fetch("http://localhost:8080/crud/products")
+            .then(res => res.json())
+            .then((result) => { setData(result); 
+                setFilteredData(result.slice((offset * postsPerPage)-postsPerPage ,(offset * postsPerPage))); 
+                setFilteredData2(result); });
+        }
+        else
+        {
+            fetch("http://localhost:8080/product/searchbyname/"+event.target.value)
+            .then(res => res.json())
+            .then((result) =>
+             {
+                  setData(result); 
+                  setFilteredData(result); 
+                  setFilteredData2(result); 
+                }
+                );
+        }
     }
 
     return (
@@ -176,14 +211,8 @@ function Library()
             <Row style={{ padding: '10px' }}>
                 <Col xs={2}><h2><b>bookWorm</b></h2></Col>
                 <Col xs={4}><h2>Books to Sell</h2></Col>
-                <Col xs={4}>
-                    <div class="btn-group" >
-                        <Button variant="light" id="bt1" onClick={()=>onButton("buy")} value="buy" class="button">&nbsp;&nbsp;&nbsp;Buy&nbsp;&nbsp;&nbsp;</Button>
-                        <Button variant="light" id="bt2" onClick={()=>onButton("rent")} value="rent" class="button">&nbsp;&nbsp;&nbsp;Rent&nbsp;&nbsp;&nbsp;</Button>
-
-                    </div>
-                </Col>
-                {isLoggedIn?<Col xs={2}><Link to="/Cart"> <Button variant="primary" style={{ align: 'right' }}>Visit Cart{'>'}</Button></Link></Col>:''}
+                
+                
             </Row>
             <Row>
                 <Col xs={2}><h2><b>
@@ -218,6 +247,23 @@ function Library()
                         {/* <Row>
                 <img src={Bookcases} alt="displayimg"></img>
             </Row> */}
+
+           <form onSubmit={searchBook}>
+            <div className="form-group">
+            <div class="row">
+            <div class="col" align="center">
+          <input type="text" className="form-control" name="user_name" placeholder="Search a book.." required="required"
+            onChange={searchBook} />
+            </div>
+            <div class="col" align="center">
+            <input type="checkbox" id="rent" name="rent" value="rent" onClick={onButton} />
+            <label for="rent" style={{fontSize:'20px'}}><b> See Rentable Books</b></label>
+            </div>
+            </div>
+            </div>
+            </form>
+            <br></br>
+            <hr></hr>
                         <Row>
                             {filteredData.map(book => (
 
@@ -244,6 +290,19 @@ function Library()
 
                             ))}
                         </Row>
+                        < ReactPaginate
+                        
+       previousLabel={"previous" }
+       nextLabel={ "next" }
+       breakLabel={ "..." }
+       breakClassName={ "break-me" }
+       pageCount={ pageCount }
+       onPageChange={ handlePageClick }
+       containerClassName={ "pagination" }
+       subContainerClassName={ "pages pagination" }
+       activeClassName={ "active" } >
+
+       </ReactPaginate>
                     </Container>
                 </h2></Col>
             </Row>
