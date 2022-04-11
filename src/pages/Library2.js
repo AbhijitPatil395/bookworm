@@ -9,6 +9,8 @@ function Library()
     const navigate=useNavigate();
     const isLoggedIn=sessionStorage.getItem("IsLoggedIn");
     const [tran, setTran] = useState('p')
+    const [lang,setLang]= useState([]);
+    const [genere,setGenere]= useState([]);
     const UserId=sessionStorage.getItem("UserId");
     let [data, setData] = useState([]);
     let [filteredData, setFilteredData] = useState([]);
@@ -18,8 +20,13 @@ function Library()
 
         fetch("http://localhost:8080/crud/products")
             .then(res => res.json())
-            .then((result) => { setData(result); setFilteredData(result); setFilteredData2(result); });
-   
+            .then((result) => { setData(result);console.log(result); setFilteredData(result); setFilteredData2(result); });
+        fetch("http://localhost:8080/language/get")
+            .then(res => res.json())
+            .then((result) =>{setLang(result)});
+        fetch("http://localhost:8080/genere/get")
+            .then(res => res.json())
+            .then((result) =>{setGenere(result)});
     }, [])
 
     const onButton = (val) => {
@@ -39,30 +46,76 @@ function Library()
         }
 
     };
-    const onFilterLang = (val) => {
-                
+    const onFilterLang = (event) => {
+                console.log(event.target.value)
+                let val=event.target.value;
                 console.log(val)
-            switch (val) {
-
-                    case 1: setFilteredData(filteredData2.filter((elem) =>  elem.productLanguage=='1'));
-                              break;
-                    case 5: setFilteredData(filteredData2.filter((elem) => elem.productLanguage=='5')); 
-                             break;
-                    case 7: setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='7')); 
-                             break;
-                    case 3: setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='3'));  
-                            break;
-                    case 0: setFilteredData(filteredData2);
-                             break;
-                     default: setFilteredData=[];
-                
-                } 
+                if(val==1)
+                {console.log("case1");
+                setFilteredData(filteredData2.filter((elem) => elem.productLanguage=='1'));}
+                else if(val==2)
+                {console.log("case2");
+                setFilteredData(filteredData2.filter((elem) => elem.productLanguage=='2')); }
+                else if(val==4)
+                {console.log("case4");
+                setFilteredData(filteredData2.filter((elem) => elem.productLanguage=='4')); }
+                else if(val==3)
+                {console.log("case3");
+                setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='3'));}
+                else if(val==4)
+                {console.log("case4");
+                setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='4'));}
+                else if(val==5)
+                {console.log("case5");
+                setFilteredData(filteredData2.filter((elem) => elem.productLanguage =='5')); }
+                else if(val==0)
+                {console.log("case0");
+                setFilteredData(filteredData2);
+                }
+                else
+                {setFilteredData=[];}
               
     };
 
-
-   
-
+    const onFilterGenere = (event) => {
+        console.log(event.target.value)
+        let val=event.target.value;
+        console.log(val)
+        if(val==1)
+        {console.log("case1");
+        setFilteredData(filteredData2.filter((elem) => elem.productGenere =='1'));}
+        else if(val==2)
+        {console.log("case2");
+        setFilteredData(filteredData2.filter((elem) => elem.productGenere =='2'));}
+        else if(val==3)
+        {console.log("case3");
+        setFilteredData(filteredData2.filter((elem) => elem.productGenere =='3'));}
+        else if(val==4)
+        {console.log("case4");
+        setFilteredData(filteredData2.filter((elem) => elem.productGenere =='4'));}
+        else if(val==5)
+        {console.log("case5");
+        setFilteredData(filteredData2.filter((elem) => elem.productGenere =='5'));}
+        else if(val==6)
+        {console.log("case6");
+        setFilteredData(filteredData2.filter((elem) => elem.productGenere =='6'));}
+        else if(val==7)
+        {console.log("case7");
+        setFilteredData(filteredData2.filter((elem) => elem.productGenere =='7'));}
+        else if(val==8)
+        {console.log("case8");
+        setFilteredData(filteredData2.filter((elem) => elem.productGenere =='8'));}
+        else if(val==9)
+        {console.log("case9");
+        setFilteredData(filteredData2.filter((elem) => elem.productGenere =='9'));}
+        else if(val==0)
+        {console.log("case0");
+        setFilteredData(filteredData2);
+        }
+        else
+        {setFilteredData=[];}
+      
+};
     
     const submitHandler = (id) => 
     {
@@ -89,10 +142,6 @@ function Library()
         }
 
     }
-
-
-
-
     const rentHandler = () => {
 
 
@@ -100,19 +149,6 @@ function Library()
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     return (
         <><Navigationbar/>
@@ -132,26 +168,28 @@ function Library()
             <Row>
                 <Col xs={2}><h2><b>
 
-                    <Container style={{ paddingTop: '50px' }}>
-                        <Row style={{ paddingBottom: "20px" }}>
-                            <Button variant="light" onClick={(e)=>onFilterLang(0)} value={0}><h5 style={{ textAlign: 'left' }}><b>All Books</b></h5></Button>
-                            {/* <button class="btn btn-primary" onClick={(e)=>onFilterLang(0)} value={0} type="button"><b>ALL</b></button> */}
-                           
+                    <Container style={{ paddingTop: '70px' }}>
+                        <Row style={{ paddingBottom: "30px", fontSize:"50px",paddingLeft:"10px"}}>
+                            <Button style={{padding:"10px"}} variant="light" value={0} onClick={onFilterLang}><b>All Books</b></Button>
                         </Row>
-                        <Row style={{ paddingBottom: "20px" }}>
-                            <Button variant="light" onClick={(e)=>onFilterLang(1)} value={1}><h5 style={{ textAlign: 'left' }}><b>English</b></h5></Button>
-                            {/* <button class="btn btn-primary" onClick={(e)=>onFilterLang(1)} value={1} type="button"><b>English</b></button> */}
+                        <Row style={{ paddingBottom: "30px", fontSize:"18px",paddingLeft:"22px"}} >
+                            <select onChange={onFilterLang}>
+                                <option value={0}>Language</option>
+                                {console.log(lang)}
+                                {lang.map(elem=>{
+                                    return<option value={elem.langId}>{elem.langDesc}</option>
+                                })}
+                            </select>                           
+                        </Row>
 
-                        </Row>
-                        <Row style={{ paddingBottom: "20px" }}>
-                            <Button variant="light" onClick={(e)=>onFilterLang(5)} value={5}><h5 style={{ textAlign: 'left' }}><b>Hindi</b></h5></Button>
-                        </Row>
-                        <Row style={{ paddingBottom: "20px" }}>
-                            <Button variant="light" onClick={(e)=>onFilterLang(3)} value={3}><h5 style={{ textAlign: 'left' }}><b>Marathi</b></h5></Button>
-                        </Row>
-                        <Row style={{ paddingBottom: "20px" }}>
-                            <Button variant="light" onClick={(e)=>onFilterLang(7)} value={7}><h5 style={{ textAlign: 'left' }}><b>Kokani</b></h5></Button>
-                            {/* <button class="btn btn-primary" onClick={(e)=>onFilterLang(7)} value={7} type="button"><b>Kokani</b></button> */}
+                        <Row style={{ paddingBottom: "20px", fontSize:"18px",paddingLeft:"22px"}}>
+                        <select onChange={onFilterGenere}>
+                                <option value={0}>Genere</option>
+                                {console.log(genere)}
+                                {genere.map(elem=>{
+                                    return<option value={elem.genereId}>{elem.genereDesc}</option>
+                                })}
+                            </select> 
                         </Row>
                     </Container>
                 </b></h2></Col>
